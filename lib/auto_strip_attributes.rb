@@ -70,6 +70,9 @@ class AutoStripAttributes::Config
         value = value.respond_to?(:gsub) ? value.gsub(/[[:space:]]+/, ' ') : value
         value.respond_to?(:strip) ? value.strip : value
       end
+      set_filter(strip_html: true) do |value|
+        ActionController::Base.helpers.strip_tags value
+      end
       set_filter(delete_whitespaces: false) do |value|
         value.respond_to?(:delete) ? value.delete(" \t") : value
       end
